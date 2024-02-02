@@ -5,10 +5,7 @@ import org.dyalex.spring_boot.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,7 +36,7 @@ public class UsersController {
         return "/users/edit";
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public String editUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/";
@@ -56,7 +53,7 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "/users/delete")
+    @DeleteMapping(value = "/users/delete")
     public String deleteUser(@RequestParam long id) {
         userService.deleteById(id);
         return "redirect:/";
