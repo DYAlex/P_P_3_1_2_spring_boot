@@ -2,8 +2,10 @@ package org.dyalex.spring_boot.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -19,9 +21,6 @@ public class User {
 
     @Column(name = "role")
     private String role;
-
-    public User() {
-    }
 
     public User(String name, String lastName, String role) {
         this.name = name;
