@@ -7,19 +7,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final User defaultUser = new User("Noname", "Nonamer", "No role");
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public User findById(Long id) {
-        return userRepository.findById(id).orElse(defaultUser);
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 
     public List<User> findAll() {
@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
     @Transactional

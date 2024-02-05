@@ -12,6 +12,7 @@ import java.util.List;
 @Controller
 public class UsersController {
     private final UserService userService;
+    private final User defaultUser = new User("Noname", "Nonamer", "No role");
 
     public UsersController(UserService userService) {
         this.userService = userService;
@@ -26,13 +27,13 @@ public class UsersController {
 
     @GetMapping("/users/show")
     public String show(@RequestParam("id") long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
+        model.addAttribute("user", userService.findById(id).orElse(defaultUser));
         return "users/show";
     }
 
     @GetMapping("/users/edit")
     public String editUserPage(@RequestParam("id") long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
+        model.addAttribute("user", userService.findById(id).orElse(defaultUser));
         return "/users/edit";
     }
 
